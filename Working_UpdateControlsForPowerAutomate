@@ -1,0 +1,20 @@
+;;-----                                                                -----;;
+;;  Working js for updating the "Service type" dropown in Credible form 1   ;;
+;;===                                                                    ===;;
+
+setTimeout(() => {		\\ Set a timeout timer
+	const mainFrame = window.top.frames['main'];		\\ Access the frame named "main"
+	if (mainFrame && mainFrame.document) {		\\ The first child of "main" is the document
+		console.log('Successfuly got mainFrame and mainFrame.document');
+		let dropdown = mainFrame.document.querySelector("select[name='visittype_id']");		\\ Attempt to access the dropdown control
+		if (dropdown) {
+			console.log('Successfully got dropdown');
+			dropdown.value = '236';		\\ Update its value. '236' was just used for testing. That needs to be changed to the real value
+			dropdown.dispatchEvent(new Event('change'));		\\ Send the change event so the event listeners can recognize the change
+		} else { 
+			console.log('Failed to get dropdown');		\\ I'm not sure if PA Desktop has built-in access to the Chrome console. Need to 
+		}                                           \\ check. If not, I'll probably change the console.log() to something that 
+	} else {                                      \\ modifies the html on the page to send plain text somewhere within the window 
+		console.log('Failed to get mainFrame');     \\ to take advantage of a Wait For Window Text action.
+	}
+}, 200);
