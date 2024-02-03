@@ -1,0 +1,159 @@
+
+//------------------Category--------------------------
+	try {
+		var categoryElement = $('select[name="itilcategories_id"]');
+		categoryElement.trigger('setValue','34');			categoryElement.trigger('select2:select');	
+	} catch (error) {
+		console.log('Failure at categoryElement', error);
+	}
+
+
+//------------------------Title------------------------------------
+	try { 
+		var titleElement = document.querySelector('[id^="name_"]');
+		titleElement.value = "Client support";
+	} catch (error) {
+		console.log('Failure at titleElement', error);
+	};
+		
+//----------------------Body------------------------------------
+	setTimeout(function() {
+		const wFrame = window.frames[0];
+		if (wFrame) {
+			try {
+				wFrame.frameElement.contentDocument.activeElement.innerHTML = "The client called in for support because the client was having trouble joining the Teams meeting.";
+			} catch (error) {
+				console.log('Failure at frameElement', error);
+			}
+		} else {
+			console.log('Failure at wFrame');
+		}
+	}, 300);	
+	
+//-------------------------Date time------------------------
+	setTimeout(function() {
+		let theDate = "2024-01-31 08:30:00";
+		
+		try {
+			// This first element is the <select> element
+			document.querySelector(".col-xxl-8.field-container > .input-group.flex-grow-1.flatpickr > .form-control.rounded-start.ps-2.input").value = theDate;
+		} catch (error) {
+			console.log('Failed at date <select>', error);
+		}
+	}, 300);
+
+//---------------------------Status---------------------------------
+	setTimeout(function() {
+		var data = {					// Create data object
+			"id" : 2,
+			"text" : "Processing (assigned)",
+			"tagName" : "OPTION",
+			"select2Id" : "53",
+			"value" : "2",
+			"title" : ""
+		};
+		try {
+			var statusElement = $('[id^="dropdown_status"]').first();		// Access the element
+		} catch (error) {
+			console.log('Failed at statusElement', error);
+		}
+		if (statusElement) {
+			var newOption = new Option(data.text, data.id, false, false);		// Define the select option
+			statusElement.val('2');		// We gave the object a value of 2
+			statusElement.append(newOption).trigger('change');		// Trigger the change
+			statusElement.trigger({
+				type: 'select2:select',		// Trigger the select2:select event
+				params: {
+					data: data
+				}
+			});
+		}	
+	}, 300);
+		
+//-----------------------------Source--------------------------------
+	setTimeout(function() {
+		var data = {		// Create the data object
+			"text" : "E-Mail",
+			"tagName" : "SPAN",
+			"select2Id" : "128",
+			"value" : "9",
+			"textContent" : "E-Mail",
+			"title" : "E-Mail"
+			};
+
+		try {
+			var sourceElement = $('[id^="dropdown_requesttypes"]').first();
+		} catch (error) {
+			console.log('Failed at sourceElement', error);
+		}
+		
+		if (sourceElement) {
+			var newOption = new Option(data.text, data.id, false, false);
+			sourceElement.val('9');
+			sourceElement.append(newOption).trigger('change');
+			sourceElement.trigger({
+				type: 'select2:select',
+				params: {
+					data: data
+				}
+			});
+
+			try {			// Set the element which displays the text
+				var sourceTextElement = document.querySelector('[aria-labelledby^="select2-dropdown_requesttypes"] > span');
+			} catch (error) {
+				console.log('Failed at sourceTextElement', error);
+			}
+			
+			if (sourceTextElement) {
+				sourceTextElement.value = "E-Mail";
+				sourceTextElement.textContent = "E-Mail";
+			};
+		};
+	}, 300);
+	
+//--------------------------Location------------------------------
+	setTimeout(function() {
+		var data = {		// Create the data object
+			"id" : 33,
+			"text" : "No Relevant Location",
+			"level" : 0,
+			"selection_text" : "No Relevant Location",
+			"title" : "No Relevant Location - ",
+			"_resultId" : "select2-dropdown_locations_id996827315-result-f5rd-33"
+			};
+			
+		try {
+			var locationElement = $('[id^="dropdown_locations_id"]').first();
+		} catch (error) {
+			console.log('Failed at locationElement');
+		}
+		
+		if (locationElement) { 
+			locationElement.val(null).trigger('change');
+			setTimeout(100)
+			locationElement.append(newOption).trigger('change');
+			var newOption = new Option(data.text, data.id, false, false);
+			locationElement.val('33');
+			setTimeout(100)
+			locationElement.trigger({
+				type: 'select2:select',
+				params: {
+					data: data
+				}
+			});
+			
+		// I'm not exactly sure why, but the element doesn't update correctly unless the script triggers the events twice. 
+			locationElement.val(null).trigger('change');
+			setTimeout(100)
+			locationElement.append(newOption).trigger('change');
+			var newOption = new Option(data.text, data.id, false, false);
+			locationElement.val('33');
+			setTimeout(100)
+			locationElement.trigger({
+				type: 'select2:select',
+				params: {
+					data: data
+				}
+			});
+		};
+	}, 300);
